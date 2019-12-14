@@ -22,7 +22,7 @@ const ItemPageDisconnected = ({
                     }
                 })
             }
-        },[fields])
+        },[fields, justDeleted, fetchHandler, match.params.id])
 
         const handleDelete = () =>{
             setJustDeleted(true);
