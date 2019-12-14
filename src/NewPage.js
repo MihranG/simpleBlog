@@ -12,12 +12,12 @@ class NewPageWithoutForm extends Component{
     handleSubmit = (e)=>{
         e.preventDefault()
         this.props.postItem(this.props.values).then(res=>{
-            console.log('res ok', res)
+            console.log('res ok', res, this.props.values)
+            this.props.history.push('/');
 
-            if(res.ok){
-                this.props.dispatch(addBlogItem(this.props.values))
-                this.props.history.push('/');
-            }
+            //if(res.ok){
+                // this.props.dispatch(addBlogItem(this.props.values))
+            //}
         });
        
     }

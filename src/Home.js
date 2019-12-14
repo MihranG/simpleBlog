@@ -6,9 +6,11 @@ import {Link} from 'react-router-dom'
 
 const HomeDisconnected = ({isLoading, items, fetchItems, setLoading, history})=>{
     useEffect(()=>{
-        setLoading(true);
-        fetchItems()
-    },[history]);
+        if(Object.keys(items).length < 5 ){
+            setLoading(true);
+            fetchItems()
+        }  
+    },[]);
 
     const itemClickHandler = (id)=>() =>{
         console.log(865, id, history)

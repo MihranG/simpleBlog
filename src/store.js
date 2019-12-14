@@ -32,37 +32,25 @@ const blogReducerSlice = createSlice({
             state.isLoading = false;
 
             items.forEach(item=>{
-                state.items[nextBlogItemID++] = item
+                state.items[item.id] = item
             });
 
         },
-        addBlogItem : {
-            reducer: (state, payload)=>{
-                const {title, contents, categories, id} = payload;
-                console.log('addBlogItem', payload)
-                const newId = state.items[0].id+1;
+        addBlogItem(state, action){
+                const {title, contents, categories, id} = action.payload;
+                console.log('addBlogItem', action.payload)
 
-                state.items[newId] = {
+                state.items[id] = {
                     id, 
                     title, 
                     contents,
                     categories
                 }
-            },
-            prepare : (newBlogDetails, stateCategories)=>{
-                const {categories} = newBlogDetails;
-                // const categoryIDs = [];
-                // categories.forEach(category=>{
-                //     categoryIDs.push(stateCategories.indexOf(category))
-                // })
-                return {payload: {
-                    ...newBlogDetails, 
-                    // id: nextBlogItemID++
-                }}
-            }
+            
         },
-        deleteBlogItem(state, id){
-            delete state.items[id]
+        deleteBlogItem(state, action){
+            console.log('deleteBlogItem', action.payload.id)
+            delete state.items[action.payload.id]
         }
     }
 })

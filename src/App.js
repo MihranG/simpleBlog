@@ -23,7 +23,7 @@ function App() {
             render={({history, match})=>(<NewPage history={history} match={match}/>)}
           />
           <Route path="/posts/:id"  
-            render={({match})=>(<ItemPage match={match} history={history} />)}
+            render={({match, history})=>(<ItemPage match={match} history={history} />)}
           />
         </Switch>
         </div>

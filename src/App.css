@@ -47,3 +47,8 @@
   align-content: row;
   padding: 0 10px
 }
+
+.itemWrapper:hover{
+  background-color: gray;
+  
+}
