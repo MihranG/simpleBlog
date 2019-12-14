@@ -1,0 +1,41 @@
+import React, { useEffect} from 'react';
+import {connect} from 'react-redux';
+import {fetchItems} from './thunks';
+import {setLoading} from './store'
+import {Link} from 'react-router-dom'
+
+const HomeDisconnected = ({isLoading, items, fetchItems, setLoading, history})=>{
+    useEffect(()=>{
+        setLoading(true);
+        fetchItems()
+    },[history]);
+
+    const itemClickHandler = (id)=>() =>{
+        console.log(865, id, history)
+        history.push(`/posts/${id}`)
+    }
+    return (isLoading ? <p>Loading...</p> : 
+        <>
+            <Link to='posts/new' > New Post</Link>
+            {Object.keys(items).map((id, index)=>(
+                <div key={items[id].id+''+index} data-id={id} className='itemWrapper' onClick={itemClickHandler(id)}>
+                    <div>{items[id].title}</div>
+                    <div style={{marginRight: 0}}>{items[id].categories}</div>
+                </div>
+            ))}
+        </>
+    )
+}
+
+const mapStateToProps = (state)=>{
+    return ({
+        items: state.blog.items,
+        isLoading: state.blog.isLoading,
+})}
+const mapDispatchToProps = (dispatch)=>{
+    return {
+        fetchItems : dispatch(fetchItems()),
+        setLoading: loadingState=> dispatch(setLoading(loadingState))
+    }
+}
+export const Home = connect(mapStateToProps, mapDispatchToProps)(HomeDisconnected)
