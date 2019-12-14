@@ -7,24 +7,20 @@ import {addBlogItem} from './store'
 import {postItem} from './thunks'
 
 import ('./NewPage.css');
-console.log(34345);
+
 class NewPageWithoutForm extends Component{
+    
     handleSubmit = (e)=>{
         e.preventDefault()
         this.props.postItem(this.props.values).then(res=>{
-            console.log('res ok', res, this.props.values)
             this.props.history.push('/');
-
-            //if(res.ok){
-                // this.props.dispatch(addBlogItem(this.props.values))
-            //}
         });
        
     }
+
     renderInputField = (field)=>{
         const { meta: { touched, error } } = field;
         
-        // const className = `form-group ${touched && error ? 'has-danger' : ''}`;
         const isContentInput = field.label === 'Content';
         return(
            <div className="input-wrapper">
@@ -46,8 +42,8 @@ class NewPageWithoutForm extends Component{
            </div>
         )
      }
-    render(){
 
+    render(){
         return (
             <form onSubmit={this.handleSubmit}>
                 <Field
@@ -56,7 +52,7 @@ class NewPageWithoutForm extends Component{
                     component = {this.renderInputField}
                 />
                 <Field
-                    label="categories"
+                    label="Categories"
                     name="categories"
                     component={ this.renderInputField }
                 />
@@ -66,15 +62,18 @@ class NewPageWithoutForm extends Component{
                     component={ this.renderInputField }
                 />
                 <div className="button-wrapper">
-                    <button type="submit" className="submit-button" disabled={this.props.isThereValidationErrors} >Submit</button>
+                    <button type="submit" 
+                        className="submit-button" 
+                        disabled={this.props.isThereValidationErrors} 
+                        >
+                            Submit
+                    </button>
                     <Link to="/" className="cancel-button"> Cancel </Link>
                 </div>
          </form>
         )
     }
 }
-
-
 
 const validate = formValues =>{
     const errors = {};
@@ -89,9 +88,9 @@ const validate = formValues =>{
     return errors;
 }
 
-
 const mapStateToProps = state=>({
-    isThereValidationErrors: state.form.add_item.syncErrors && Object.keys(state.form.add_item.syncErrors).length>0,
+    isThereValidationErrors: 
+        state.form.add_item.syncErrors && Object.keys(state.form.add_item.syncErrors).length>0,
     values: state.form.add_item.values
 });
 

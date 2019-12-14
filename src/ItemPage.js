@@ -17,9 +17,9 @@ const ItemPageDisconnected = ({
             if(!fields && !justDeleted){
                 setLoading(true);
                 fetchHandler(match.params.id).then(res=>{
-                    setLoading(false);
-                    //  addItemToStore('sdfsdf')
-
+                    if(res.payload && res.payload.ok){
+                        setLoading(false);
+                    }
                 })
 
             }
@@ -28,7 +28,9 @@ const ItemPageDisconnected = ({
         const handleDelete = () =>{
             setJustDeleted(true);
             deleteHandler(fields.id).then(res=>{
-                history.push('/')
+                if(res.payload && res.payload.ok){
+                    history.push('/');
+                }
             })
         }
         return(
@@ -48,18 +50,15 @@ const ItemPageDisconnected = ({
 
 const mapStateToProps = (state, ownProps) =>{
     const id = ownProps.match.params.id;
-    console.log(8232, id , state.blog)
     return {
         fields: state.blog.items[id],
     }
 }
 
-const mapDispatchToProps = (dispatch)=>{
-    return{
+const mapDispatchToProps = (dispatch)=>({
         fetchHandler: (id)=>dispatch(fetchSingleItem(id)),
         deleteHandler: (id)=>dispatch(deleteItem(id)),
         addItemToStore: (fields)=>dispatch(addBlogItem(fields))
-    }
-}
+    })
 
 export const ItemPage = connect(mapStateToProps, mapDispatchToProps)(ItemPageDisconnected)

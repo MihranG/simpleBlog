@@ -13,9 +13,9 @@ const HomeDisconnected = ({isLoading, items, fetchItems, setLoading, history})=>
     },[]);
 
     const itemClickHandler = (id)=>() =>{
-        console.log(865, id, history)
         history.push(`/posts/${id}`)
     }
+
     return (isLoading ? <p>Loading...</p> : 
         <>
             <Link to='posts/new' > New Post</Link>
@@ -29,15 +29,13 @@ const HomeDisconnected = ({isLoading, items, fetchItems, setLoading, history})=>
     )
 }
 
-const mapStateToProps = (state)=>{
-    return ({
-        items: state.blog.items,
-        isLoading: state.blog.isLoading,
-})}
-const mapDispatchToProps = (dispatch)=>{
-    return {
+const mapStateToProps = (state)=>({
+    items: state.blog.items,
+    isLoading: state.blog.isLoading,
+})
+
+const mapDispatchToProps = (dispatch)=>({
         fetchItems : dispatch(fetchItems()),
-        setLoading: loadingState=> dispatch(setLoading(loadingState))
-    }
-}
+        setLoading: loadingState => dispatch(setLoading(loadingState))
+    })
 export const Home = connect(mapStateToProps, mapDispatchToProps)(HomeDisconnected)

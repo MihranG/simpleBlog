@@ -9,7 +9,6 @@ import {NewPage} from './NewPage';
 import {ItemPage} from './ItemPage'
 
 
-console.log('ttt', store)
 function App() {
   return (
     <Provider store={store}>
@@ -29,7 +28,6 @@ function App() {
         </div>
       </BrowserRouter>
     </Provider>
-   
   );
 }
 
