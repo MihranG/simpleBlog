@@ -21,7 +21,6 @@ const ItemPageDisconnected = ({
                         setLoading(false);
                     }
                 })
-
             }
         },[fields])
 
@@ -56,9 +55,9 @@ const mapStateToProps = (state, ownProps) =>{
 }
 
 const mapDispatchToProps = (dispatch)=>({
-        fetchHandler: (id)=>dispatch(fetchSingleItem(id)),
-        deleteHandler: (id)=>dispatch(deleteItem(id)),
-        addItemToStore: (fields)=>dispatch(addBlogItem(fields))
-    })
+    fetchHandler: (id)=>dispatch(fetchSingleItem(id)),
+    deleteHandler: (id)=>dispatch(deleteItem(id)),
+    addItemToStore: (fields)=>dispatch(addBlogItem(fields))
+})
 
 export const ItemPage = connect(mapStateToProps, mapDispatchToProps)(ItemPageDisconnected)

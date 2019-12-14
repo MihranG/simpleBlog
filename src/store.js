@@ -7,8 +7,6 @@ const initialBlogStoreState = {
     isLoading: false,
 }
 
-let nextBlogItemID = 0;
-
 const blogReducerSlice = createSlice({
     name: 'blogReducerSlice',
     initialState: initialBlogStoreState,
@@ -35,7 +33,7 @@ const blogReducerSlice = createSlice({
                     categories
                 }
         },
-        
+
         deleteBlogItem(state, action){
             delete state.items[action.payload.id]
         }

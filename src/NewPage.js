@@ -3,7 +3,6 @@ import { Field, reduxForm } from 'redux-form';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import {addBlogItem} from './store'
 import {postItem} from './thunks'
 
 import ('./NewPage.css');

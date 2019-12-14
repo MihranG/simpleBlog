@@ -1,5 +1,5 @@
 
-import {bulkAddBlogItems, setLoading, addBlogItem, deleteBlogItem} from './store'
+import {bulkAddBlogItems, addBlogItem, deleteBlogItem} from './store'
 
 const URLBase = 'http://reduxblog.herokuapp.com/api/posts';
 const uniqueRandomKey = Math.round(1000*Math.random()) ; 

@@ -1,32 +1,36 @@
-import React, { useEffect} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import {fetchItems} from './thunks';
 import {setLoading} from './store'
 import {Link} from 'react-router-dom'
 
-const HomeDisconnected = ({isLoading, items, fetchItems, setLoading, history})=>{
-    useEffect(()=>{
+class HomeDisconnected extends React.Component {
+
+    componentDidMount(){
+        const {items, setLoading, fetchItems} = this.props
         if(Object.keys(items).length < 5 ){
             setLoading(true);
             fetchItems()
-        }  
-    },[]);
-
-    const itemClickHandler = (id)=>() =>{
-        history.push(`/posts/${id}`)
+        } 
     }
+   
 
+    itemClickHandler = (id)=>() =>{
+        this.props.history.push(`/posts/${id}`)
+    }
+    render(){
+    const {isLoading, items } = this.props
     return (isLoading ? <p>Loading...</p> : 
         <>
             <Link to='posts/new' > New Post</Link>
             {Object.keys(items).map((id, index)=>(
-                <div key={items[id].id+''+index} data-id={id} className='itemWrapper' onClick={itemClickHandler(id)}>
+                <div key={items[id].id+''+index} data-id={id} className='itemWrapper' onClick={this.itemClickHandler(id)}>
                     <div>{items[id].title}</div>
                     <div style={{marginRight: 0}}>{items[id].categories}</div>
                 </div>
             ))}
         </>
-    )
+    )}
 }
 
 const mapStateToProps = (state)=>({
