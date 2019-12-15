@@ -1,5 +1,10 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+The project is a simple blog application which is implemented with use of React.js (including react hooks), redux (with its new redux toolkit). The app is SPA (single page application) with which routing is implemented with react-router-dom. App has three main pages 
+    Home - page where all the items are shown
+    New Page - page for creating new blog item
+    Item Page - page for viewing single item where you can also delete existing record
+
 ## Available Scripts
 
 In the project directory, you can run:
